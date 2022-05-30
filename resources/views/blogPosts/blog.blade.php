@@ -23,13 +23,21 @@
             <ul>
                 @foreach ($categories as $category)
                     <li><a href="{{route('blog.index', ['category' => $category->name ])}}">{{ $category->name }}</a></li>
-                    
                 @endforeach
             </ul>
         </div>
         <section class="cards-blog latest-blog">
             
             @forelse($posts as $post)
+            @if(!Route::input('category'))
+            <div class="categories">
+                <ul>
+                   
+                        <li><a href="{{route('blog.index', ['category' => $post->category->name ])}}">{{ $post->category->name }}</a></li>
+                    
+                </ul>
+            </div>
+            @endif
                 <div class="card-blog-content">
                     <img src="{{ asset($post->imagePath) }}" alt="" style=" border-radius: 10px;"  />
                     @auth
